@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:test_/links.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -31,8 +32,7 @@ class _SearchScreenState extends State<SearchScreen> {
     });
 
     try {
-      final response = await http
-          .get(Uri.parse('https://api.tvmaze.com/search/shows?q=$query'));
+      final response = await http.get(Uri.parse(searchScreenMovies + query));
 
       if (response.statusCode == 200) {
         setState(() {

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:test_/links.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -21,8 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> fetchMovies() async {
-    final response =
-        await http.get(Uri.parse('https://api.tvmaze.com/search/shows?q=all'));
+    final response = await http.get(Uri.parse(homescreenMovies));
     setState(() {
       movies = json.decode(response.body);
       showMore = List.generate(movies.length, (index) => false);
@@ -83,8 +83,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 topLeft: Radius.circular(12),
                                 topRight: Radius.circular(12),
                               ),
-                              child:
-                               AspectRatio(
+                              child: AspectRatio(
                                 aspectRatio: 7 / 9,
                                 child: Image.network(
                                   movie['image']?['medium'] ??
